@@ -13,6 +13,7 @@
 		0467B7FF210CB986007AF457 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0467B7FE210CB986007AF457 /* Assets.xcassets */; };
 		0467B802210CB986007AF457 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0467B800210CB986007AF457 /* LaunchScreen.storyboard */; };
 		0467B80A210CB9B7007AF457 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467B809210CB9B7007AF457 /* Constants.swift */; };
+		04B6BB58210DDE8900410021 /* MovieGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B6BB57210DDE8900410021 /* MovieGridViewCell.swift */; };
 		04E75FC2BB7294901AB63D6D /* Pods_Movies_Info.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C02861F1725C117ABDB057 /* Pods_Movies_Info.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		0467B801210CB986007AF457 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0467B803210CB986007AF457 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0467B809210CB9B7007AF457 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		04B6BB57210DDE8900410021 /* MovieGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridViewCell.swift; sourceTree = "<group>"; };
 		51C014BC804AED04468ECDA9 /* Pods-Movies Info.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies Info.release.xcconfig"; path = "Pods/Target Support Files/Pods-Movies Info/Pods-Movies Info.release.xcconfig"; sourceTree = "<group>"; };
 		5F813DA0EA2D7CE1774B51E5 /* Pods-Movies Info.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies Info.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movies Info/Pods-Movies Info.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,6 +68,7 @@
 				0467B7F7210CB986007AF457 /* AppDelegate.swift */,
 				0467B7F9210CB986007AF457 /* MoviesTabViewContorller.swift */,
 				0467B809210CB9B7007AF457 /* Constants.swift */,
+				04B6BB57210DDE8900410021 /* MovieGridViewCell.swift */,
 				0467B7FB210CB986007AF457 /* Main.storyboard */,
 				0467B7FE210CB986007AF457 /* Assets.xcassets */,
 				0467B800210CB986007AF457 /* LaunchScreen.storyboard */,
@@ -211,6 +214,7 @@
 				0467B7FA210CB986007AF457 /* MoviesTabViewContorller.swift in Sources */,
 				0467B7F8210CB986007AF457 /* AppDelegate.swift in Sources */,
 				0467B80A210CB9B7007AF457 /* Constants.swift in Sources */,
+				04B6BB58210DDE8900410021 /* MovieGridViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
