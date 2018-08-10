@@ -33,7 +33,7 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
     //Mark: - Collectionview methods
    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -41,14 +41,8 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        return 0
     }
-    
-    
-    
-    
-    
-    
     
     
     

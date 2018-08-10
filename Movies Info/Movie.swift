@@ -9,5 +9,29 @@
 import Foundation
 
 struct Movie {
+    var title: String?
+    var overview: String?
+    var posterPath: String?
+    var backdropPath: String?
+    var voteAverage: Double?
     
+    
+    init( movieJsonDict : [String : Any]) {
+        if let title =  movieJsonDict["title"] as? String{
+            self.title = title
+        }
+        if let overview =  movieJsonDict["overview"] as? String{
+            self.overview = overview
+        }
+        
+        if let posterPath =  movieJsonDict["poster_path"] as? String{
+            self.posterPath = posterPath
+        }
+        if let backdropPath =  movieJsonDict["backdrop_path"] as? String{
+            self.backdropPath = backdropPath
+        }
+        if let voteAverage =  movieJsonDict["vote_average"] as? Double{
+            self.voteAverage = voteAverage
+        }
+    }
 }
