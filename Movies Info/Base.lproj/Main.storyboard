@@ -60,7 +60,7 @@
         <!--Popular Movies View Contoller-->
         <scene sceneID="Xn7-hL-Jsi">
             <objects>
-                <viewController title="Popular Movies View Contoller" id="lLS-NN-n3X" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieListViewController" title="Popular Movies View Contoller" id="lLS-NN-n3X" customClass="MovieListViewController" customModule="Movies_Info" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kqc-uP-gXn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -145,6 +145,9 @@
                         <viewLayoutGuide key="safeArea" id="HDR-aW-qXS"/>
                     </view>
                     <navigationItem key="navigationItem" id="liM-Vy-mnx"/>
+                    <connections>
+                        <outlet property="collectionView" destination="1sm-eh-Egb" id="0Yr-3S-E0s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ha0-Zd-prj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -166,10 +169,10 @@
             </objects>
             <point key="canvasLocation" x="412" y="-529.38530734632684"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Movie-->
         <scene sceneID="RXp-FZ-EI5">
             <objects>
-                <tabBarController id="McN-pA-isu" sceneMemberID="viewController">
+                <tabBarController title="Movie" id="McN-pA-isu" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3ax-4e-S6X">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
