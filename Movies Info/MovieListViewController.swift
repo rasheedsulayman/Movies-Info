@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class MovieListViewController: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource {
 
@@ -19,9 +20,13 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
-        moviesType = Constants.KEY_POPULAR
         // Do any additional setup after loading the view.
     }
+    
+    func prepareTabItem(){
+        
+    }
+    
     
     
     func loadMovies(){
@@ -47,11 +52,12 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let currentMovie = moviesList[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridViewCell", for: indexPath) as! MovieGridViewCell
-        
-        
-        let url = URL(string: "")!
-
-        cell.
+        cell.ratingsLabel.text = currentMovie.title
+        if let posterPath = currentMovie.posterImageUrl() {
+            let url = URL(string:posterPath)!
+            cell.posterImageView.af_setImage(withURL: url)
+        }
+        return cell
         
     }
     
@@ -60,7 +66,7 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return moviesList.count
     }
     
     

@@ -36,4 +36,19 @@ struct Movie {
             }
         }
     }
+    
+     func posterImageUrl() -> String? {
+        if let posterPath = posterPath {
+            return "\(Constants.POSTER_BASE_URL)\(posterPath)"
+        }
+        return nil
+    }
+    
+     func backDropImageUrl() -> String? {
+        if let backdropPath = backdropPath {
+            return "\(Constants.BACK_DROP_BASE_URL)\(backdropPath)"
+        }
+        return nil
+    }
+    
 }
