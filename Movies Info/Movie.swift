@@ -18,7 +18,6 @@ struct Movie {
    
     
     
-    
 //    var releaseYear {
 //
 //    }
@@ -49,7 +48,7 @@ struct Movie {
     }
     
     //TODO convert this to a computed variable when internet is back
-    func relaseYear () -> String? {
+    func relaseYear() -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyy/MM/dd"
         if let releaseDate = releaseDate , let dateFromString = dateFormatter.date(from: releaseDate) {

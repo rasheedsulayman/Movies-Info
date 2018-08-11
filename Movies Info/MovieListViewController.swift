@@ -10,26 +10,26 @@ import UIKit
 import AlamofireImage
 
 class MovieListViewController: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource,
-    UICollectionViewDelegateFlowLayout {
+UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     var moviesType = MoviesType.popular //Defaults to popular movies
    // var planet: Planet
     var moviesList: [Movie] = []
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.dataSource = self
-        collectionView.delegate = self
+     
         // Do any additional setup after loading the view.
         print("In ListViewController: " + moviesType.rawValue)
         loadMovies()
         setUpCollectionView()
-        
     }
 
     func setUpCollectionView() {
+    collectionView.dataSource = self
+    collectionView.delegate = self
     let columnLayout = ColumnFlowLayout(
     cellsPerRow: 2,
     minimumInteritemSpacing: 10,
@@ -37,6 +37,11 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
     sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
     collectionView.collectionViewLayout = columnLayout
         collectionView?.contentInsetAdjustmentBehavior = .always
+    }
+    
+    func setUpTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     func prepareTabItem () {
@@ -57,7 +62,6 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
         }
     }
     
-    
     func loadMovies(){
         MoviesAPIService.getMoviesList(moviesType: moviesType.rawValue) { (movies) in
             if let movies = movies {
@@ -75,38 +79,8 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
         // Dispose of any resources that can be recreated.
     }
     
+   
     
-    //Mark: - Collectionview methods
-    
-    // MARK: UICollectionViewDelegateFlowLayout methods
-    
-    
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let currentMovie = moviesList[indexPath.row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridViewCell", for: indexPath)
-            as! MovieGridViewCell
-        if let posterPath = currentMovie.posterImageUrl() {
-            let url = URL(string:posterPath)!
-            cell.posterImageView.af_setImage(withURL: url)
-        }
-        cell.ratingsLabel.text = String(format: "%.2f", currentMovie.voteAverage!)
-        
-        
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return moviesList.count
-    }
-    
-    
-
     /*
     // MARK: - Navigation
 
@@ -116,6 +90,43 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
         // Pass the selected object to the new view controller.
     }
     */
+
+    
+    
+    
+    //Mark: - Collectionview and TableView methods methods
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let currentMovie = moviesList[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridViewCell", for: indexPath)
+            as! MovieGridViewCell
+        cell.populateViews(movie: currentMovie)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return moviesList.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return moviesList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let currentMovie = moviesList[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieListViewCell", for: indexPath)
+            as! MovieListViewCell
+        cell.populateViews(movie: currentMovie)
+        return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
     
     enum ViewType {
         case list
