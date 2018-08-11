@@ -14,7 +14,15 @@ struct Movie {
     var posterPath: String?
     var backdropPath: String?
     var voteAverage: Double?
+    var releaseDate: String? //  date format pattern = " "2018-01-17"
+   
     
+    
+    
+//    var releaseYear {
+//
+//    }
+//
     
     init(movieJsonDict : [String : Any]?) {
         if let movieJsonDict = movieJsonDict {
@@ -34,7 +42,22 @@ struct Movie {
             if let voteAverage =  movieJsonDict["vote_average"] as? Double{
                 self.voteAverage = voteAverage
             }
+            if let releaseDate = movieJsonDict["release_date"] as? String {
+                self.releaseDate = releaseDate
+            }
         }
+    }
+    
+    //TODO convert this to a computed variable when internet is back
+    func relaseYear () -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyy/MM/dd"
+        if let releaseDate = releaseDate , let dateFromString = dateFormatter.date(from: releaseDate) {
+            //get only the year component
+            dateFormatter.dateFormat = "yyy"
+            return dateFormatter.string(from: dateFromString)
+        }
+        return nil
     }
     
      func posterImageUrl() -> String? {

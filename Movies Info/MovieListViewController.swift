@@ -9,10 +9,12 @@
 import UIKit
 import AlamofireImage
 
-class MovieListViewController: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource {
+class MovieListViewController: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource,
+    UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var moviesType: String!
+    var moviesType = MoviesType.popular //Defaults to popular movies
+   // var planet: Planet
     var moviesList: [Movie] = []
     
     
@@ -21,16 +23,43 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
         collectionView.dataSource = self
         collectionView.delegate = self
         // Do any additional setup after loading the view.
-    }
-    
-    func prepareTabItem(){
+        print("In ListViewController: " + moviesType.rawValue)
+        loadMovies()
+        setUpCollectionView()
         
     }
+
+    func setUpCollectionView() {
+    let columnLayout = ColumnFlowLayout(
+    cellsPerRow: 2,
+    minimumInteritemSpacing: 10,
+    minimumLineSpacing: 10,
+    sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+    collectionView.collectionViewLayout = columnLayout
+        collectionView?.contentInsetAdjustmentBehavior = .always
+    }
     
+    func prepareTabItem () {
+        let tabItem = navigationController!.tabBarItem!
+        switch moviesType {
+        case .nowPlaying:
+            title = "Now Playing"
+            tabItem.title = "Now Playing"
+        case .popular:
+            title = "Popular"
+            tabItem.title = "Popular"
+        case .topRated:
+            title = "Top rated"
+            tabItem.title = "Top Rated"
+        case .upcoming:
+            title  = "Upcoming"
+            tabItem.title = "Upcoming"
+        }
+    }
     
     
     func loadMovies(){
-        MoviesAPIService.getMoviesList(moviesType: moviesType) { (movies) in
+        MoviesAPIService.getMoviesList(moviesType: moviesType.rawValue) { (movies) in
             if let movies = movies {
                 self.moviesList.append(contentsOf: movies)
                 self.collectionView.reloadData()
@@ -48,17 +77,24 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
     
     
     //Mark: - Collectionview methods
-   
+    
+    // MARK: UICollectionViewDelegateFlowLayout methods
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let currentMovie = moviesList[indexPath.row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridViewCell", for: indexPath) as! MovieGridViewCell
-        cell.ratingsLabel.text = currentMovie.title
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridViewCell", for: indexPath)
+            as! MovieGridViewCell
         if let posterPath = currentMovie.posterImageUrl() {
             let url = URL(string:posterPath)!
             cell.posterImageView.af_setImage(withURL: url)
         }
-        return cell
+        cell.ratingsLabel.text = String(format: "%.2f", currentMovie.voteAverage!)
         
+        
+        
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -68,15 +104,6 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return moviesList.count
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 
@@ -89,5 +116,9 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    enum ViewType {
+        case list
+        case grid
+    }
 }

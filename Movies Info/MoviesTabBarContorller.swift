@@ -14,10 +14,10 @@ class MoviesTabBarContorller: UITabBarController {
         super.viewDidLoad()
         
         //Create three navigation controllers to serve as the root screen controllers for this tabBarcontroller
-        let upcomingNavigationController = getNavigationGenericNavigationViewController()
-        let nowPlayingNavigationController  = getNavigationGenericNavigationViewController()
-        let topRatedNavigationController = getNavigationGenericNavigationViewController()
-        let popularNavigationController = getNavigationGenericNavigationViewController()
+        let upcomingNavigationController = geGenericNavigationViewController()
+        let nowPlayingNavigationController  = geGenericNavigationViewController()
+        let topRatedNavigationController = geGenericNavigationViewController()
+        let popularNavigationController = geGenericNavigationViewController()
         
         //Try to set the moviesType for all the moviesListView controllers
         let upcomingMoviesViewController  = upcomingNavigationController.topViewController as! MovieListViewController
@@ -26,10 +26,15 @@ class MoviesTabBarContorller: UITabBarController {
         let popularMoviesViewController  = popularNavigationController.topViewController as! MovieListViewController
         
         //Set Movies type to determine the types of movies to load
-        upcomingMoviesViewController.moviesType =  Constants.KEY_UPCOMING
-        topRatedMoviesViewController.moviesType =  Constants.KEY_TOP_RATED
-        nowPlayingMoviesController.moviesType   =  Constants.KEY_NOW_PLAYING
-        popularMoviesViewController.moviesType  =  Constants.KEY_POPULAR
+//        upcomingMoviesViewController.moviesType =  Constants.KEY_UPCOMING
+//        topRatedMoviesViewController.moviesType =  Constants.KEY_TOP_RATED
+//        nowPlayingMoviesController.moviesType   =  Constants.KEY_NOW_PLAYING
+//        popularMoviesViewController.moviesType  =  Constants.KEY_POPULAR
+        
+        upcomingMoviesViewController.moviesType =  MoviesType.upcoming
+        topRatedMoviesViewController.moviesType =  MoviesType.topRated
+        nowPlayingMoviesController.moviesType   =  MoviesType.nowPlaying
+        popularMoviesViewController.moviesType  =  MoviesType.popular
         
         //customize tab items based on moviesType
         upcomingMoviesViewController.prepareTabItem()
@@ -37,15 +42,18 @@ class MoviesTabBarContorller: UITabBarController {
         nowPlayingMoviesController.prepareTabItem()
         popularMoviesViewController.prepareTabItem()
         
-        viewControllers = [popularNavigationController , topRatedNavigationController , nowPlayingMoviesController , upcomingMoviesViewController]
+        //set the root view controllers
+        viewControllers = [popularNavigationController , topRatedNavigationController , nowPlayingNavigationController , upcomingNavigationController]
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
         // Dispose of any resources that can be recreated.
     }
     
-    func getNavigationGenericNavigationViewController() -> UINavigationController {
+    
+    func geGenericNavigationViewController() -> UINavigationController {
         let storyboard = self.storyboard!
         return storyboard.instantiateViewController(withIdentifier: "NavigationController") as! UINavigationController
     }

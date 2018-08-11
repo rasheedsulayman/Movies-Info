@@ -48,3 +48,19 @@ class MoviesAPIService {
         return "\(url)?api_key=\(Constants.API_KEY)"
     }
 }
+
+enum MoviesType: String {
+    case popular = "popular"
+    case upcoming = "upcoming"
+    case nowPlaying = "now_playing"
+    case topRated = "top_rated"
+}
+
+
+
+
+
+
+
+
+
