@@ -9,6 +9,7 @@
 import UIKit
 
 class MovieGridViewCell: UICollectionViewCell {
+    
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var ratingsLabel: UILabel!

@@ -12,6 +12,7 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
 
     @IBOutlet weak var collectionView: UICollectionView!
     var moviesType: String!
+    var moviesList: [Movie] = []
     
     
     override func viewDidLoad() {
@@ -21,8 +22,19 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
         moviesType = Constants.KEY_POPULAR
         // Do any additional setup after loading the view.
     }
-
     
+    
+    func loadMovies(){
+        MoviesAPIService.getMoviesList(moviesType: moviesType) { (movies) in
+            if let movies = movies {
+                self.moviesList.append(contentsOf: movies)
+                self.collectionView.reloadData()
+            } else{
+                print("Error getting movies ")
+            }
+        }
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -33,7 +45,14 @@ class MovieListViewController: UIViewController, UICollectionViewDelegate , UICo
     //Mark: - Collectionview methods
    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let currentMovie = moviesList[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridViewCell", for: indexPath) as! MovieGridViewCell
+        
+        
+        let url = URL(string: "")!
+
+        cell.
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
