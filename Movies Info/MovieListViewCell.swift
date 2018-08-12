@@ -29,6 +29,7 @@ class MovieListViewCell: UITableViewCell {
     }
     
     func populateViews(movie: Movie) {
+        print("Populate inside tableview")
         if let posterPath = movie.posterImageUrl() {
             let url = URL(string:posterPath)!
             posterImageView.af_setImage(withURL: url)

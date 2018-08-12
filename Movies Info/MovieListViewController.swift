@@ -14,6 +14,22 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var toggleViewSwitch: UIBarButtonItem!
+    
+    var viewType: ViewType = .list {
+        didSet {
+            switch viewType {
+            case .list:
+                self.tableView.isHidden = false
+                self.collectionView.isHidden = true
+            case .grid:
+                self.tableView.isHidden = true
+                self.collectionView.isHidden = false
+            }
+        }
+    }
+    
+    
     var moviesType = MoviesType.popular //Defaults to popular movies
    // var planet: Planet
     var moviesList: [Movie] = []
@@ -25,6 +41,7 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
         print("In ListViewController: " + moviesType.rawValue)
         loadMovies()
         setUpCollectionView()
+        setUpTableView()
     }
 
     func setUpCollectionView() {
@@ -67,6 +84,7 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
             if let movies = movies {
                 self.moviesList.append(contentsOf: movies)
                 self.collectionView.reloadData()
+                self.tableView.reloadData()
             } else{
                 print("Error getting movies ")
             }
@@ -93,12 +111,26 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
 
     
     
+    @IBAction func togleViewTypeClicked(_ sender: Any) {
+        toggleNavBarViewTypeItem()
+    }
+    
+    func toggleNavBarViewTypeItem(){
+        switch viewType {
+        case .grid:
+            toggleViewSwitch.title = "Grid"
+            viewType = .list
+        case.list:
+            toggleViewSwitch.title = "List"
+            viewType = .grid
+        }
+    }
+    
     
     //Mark: - Collectionview and TableView methods methods
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let currentMovie = moviesList[indexPath.row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridViewCell", for: indexPath)
-            as! MovieGridViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridViewCell", for: indexPath) as! MovieGridViewCell
         cell.populateViews(movie: currentMovie)
         return cell
     }
@@ -112,12 +144,11 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let currentMovie = moviesList[indexPath.row]
+        let currentMovie = moviesList [indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieListViewCell", for: indexPath)
             as! MovieListViewCell
         cell.populateViews(movie: currentMovie)
         return cell
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

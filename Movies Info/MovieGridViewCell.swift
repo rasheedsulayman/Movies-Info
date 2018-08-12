@@ -22,5 +22,7 @@ class MovieGridViewCell: UICollectionViewCell {
         }
         yearLabel.text = movie.relaseYear()
         ratingsLabel.text = String(format: "%.2f", movie.voteAverage!)
+        print("PopulateViewsCalled")
     }
+    
 }
