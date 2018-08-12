@@ -29,13 +29,12 @@ class MovieListViewCell: UITableViewCell {
     }
     
     func populateViews(movie: Movie) {
-        print("Populate inside tableview")
         if let posterPath = movie.posterImageUrl() {
             let url = URL(string:posterPath)!
             posterImageView.af_setImage(withURL: url)
         }
         yearLabel.text = movie.relaseYear()
-        ratingsLabel.text = String(format: "%.2f", movie.voteAverage!)
+        ratingsLabel.text = String(format: " %.2f ", movie.voteAverage!)
         summaryLabel.text = movie.overview
         titleLabel.text = movie.title
     }
