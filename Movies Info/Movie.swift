@@ -14,7 +14,7 @@ struct Movie {
     var posterPath: String?
     var backdropPath: String?
     var voteAverage: Double?
-    var releaseDate: String? //  date format pattern = " "2018-01-17"
+    var releaseDate: String? //date format pattern = " "2018-01-17"
     
 //    var releaseYear {
 //

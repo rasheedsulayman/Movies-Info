@@ -31,7 +31,6 @@ class MoviesAPIService {
         }
     }
     
-    
     class func getPosterImageUrl(imagePath: String) -> String {
         return "\(Constants.POSTER_BASE_URL)\(imagePath)"
     }
@@ -55,12 +54,3 @@ enum MoviesType: String {
     case nowPlaying = "now_playing"
     case topRated = "top_rated"
 }
-
-
-
-
-
-
-
-
-

@@ -19,6 +19,4 @@ struct Constants {
     static let KEY_UPCOMING = "upcoming"
     static let KEY_TOP_RATED = "top_rated"
     static let KEY_NOW_PLAYING = "now_playing"
-    
-
 }
