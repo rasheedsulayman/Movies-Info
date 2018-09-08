@@ -20,10 +20,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rkD-Zn-kSk" userLabel="BackDrop Image View">
-                                <rect key="frame" x="0.0" y="64" width="375" height="190"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="283"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ce-aC-96v">
-                                <rect key="frame" x="0.0" y="262" width="375" height="128"/>
+                                <rect key="frame" x="0.0" y="311" width="375" height="128"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="peg-FT-WKR" userLabel="Poster Image View">
                                         <rect key="frame" x="16" y="8" width="80" height="115"/>
@@ -84,13 +84,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrY-fv-3cT">
-                                <rect key="frame" x="16" y="410" width="343" height="27.5"/>
+                                <rect key="frame" x="16" y="459" width="343" height="27.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vT6-UC-qhJ">
-                                <rect key="frame" x="16" y="445.5" width="343" height="21"/>
+                                <rect key="frame" x="16" y="494.5" width="343" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -117,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NcE-WP-Q7D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="972" y="-197.45127436281859"/>
+            <point key="canvasLocation" x="1086" y="-197"/>
         </scene>
         <!--Movie List View Controller-->
         <scene sceneID="Xn7-hL-Jsi">
@@ -311,9 +311,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="1sm-eh-Egb" id="0Yr-3S-E0s"/>
+                        <outlet property="searchBar" destination="eUb-sg-Kgu" id="APj-4V-XSj"/>
                         <outlet property="tableView" destination="eOp-PS-o26" id="yCl-fy-5zJ"/>
                         <outlet property="toggleViewSwitch" destination="dIz-s6-VBx" id="jpj-tF-s33"/>
-                        <segue destination="F0Y-mC-QJR" kind="show" id="DiD-FM-DUc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ha0-Zd-prj" userLabel="First Responder" sceneMemberID="firstResponder"/>

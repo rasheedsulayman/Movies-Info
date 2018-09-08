@@ -29,7 +29,6 @@ struct Movie {
             if let overview =  movieJsonDict["overview"] as? String{
                 self.overview = overview
             }
-            
             if let posterPath =  movieJsonDict["poster_path"] as? String{
                 self.posterPath = posterPath
             }

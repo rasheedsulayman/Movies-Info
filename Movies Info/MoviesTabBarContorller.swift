@@ -24,13 +24,7 @@ class MoviesTabBarContorller: UITabBarController {
         let topRatedMoviesViewController  = topRatedNavigationController.topViewController as! MovieListViewController
         let nowPlayingMoviesController  = nowPlayingNavigationController.topViewController as! MovieListViewController
         let popularMoviesViewController  = popularNavigationController.topViewController as! MovieListViewController
-        
-        //Set Movies type to determine the types of movies to load
-//        upcomingMoviesViewController.moviesType =  Constants.KEY_UPCOMING
-//        topRatedMoviesViewController.moviesType =  Constants.KEY_TOP_RATED
-//        nowPlayingMoviesController.moviesType   =  Constants.KEY_NOW_PLAYING
-//        popularMoviesViewController.moviesType  =  Constants.KEY_POPULAR
-        
+    
         upcomingMoviesViewController.moviesType =  MoviesType.upcoming
         topRatedMoviesViewController.moviesType =  MoviesType.topRated
         nowPlayingMoviesController.moviesType   =  MoviesType.nowPlaying

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0432501421446FB300335257 /* InfiniteScrollActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0432501321446FB300335257 /* InfiniteScrollActivityView.swift */; };
 		0467B7F8210CB986007AF457 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467B7F7210CB986007AF457 /* AppDelegate.swift */; };
 		0467B7FA210CB986007AF457 /* MoviesTabBarContorller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467B7F9210CB986007AF457 /* MoviesTabBarContorller.swift */; };
 		0467B7FD210CB986007AF457 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0467B7FB210CB986007AF457 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		00C02861F1725C117ABDB057 /* Pods_Movies_Info.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies_Info.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0432501321446FB300335257 /* InfiniteScrollActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScrollActivityView.swift; sourceTree = "<group>"; };
 		0467B7F4210CB986007AF457 /* Movies Info.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movies Info.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0467B7F7210CB986007AF457 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0467B7F9210CB986007AF457 /* MoviesTabBarContorller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTabBarContorller.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				04C6D108211CF548006883C5 /* MovieListViewController.swift */,
 				04C6D10C211CFE31006883C5 /* MoviesAPIService.swift */,
 				0467B809210CB9B7007AF457 /* Constants.swift */,
+				0432501321446FB300335257 /* InfiniteScrollActivityView.swift */,
 				04B6BB57210DDE8900410021 /* MovieGridViewCell.swift */,
 				04C6D110211F84EA006883C5 /* MovieListViewCell.swift */,
 				0467B7FB210CB986007AF457 /* Main.storyboard */,
@@ -188,12 +191,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Movies Info/Pods-Movies Info-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0432501421446FB300335257 /* InfiniteScrollActivityView.swift in Sources */,
 				0467B7FA210CB986007AF457 /* MoviesTabBarContorller.swift in Sources */,
 				04C6D109211CF548006883C5 /* MovieListViewController.swift in Sources */,
 				04C6D111211F84EA006883C5 /* MovieListViewCell.swift in Sources */,

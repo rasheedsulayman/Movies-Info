@@ -12,8 +12,10 @@ import SwiftyJSON
 
 class MoviesAPIService {
     
-    class func getMoviesList (moviesType : String, completion: @escaping ([Movie]?) -> Void) {
-        let moviesURL = getMoviesListURL(moviesType: moviesType)
+    typealias MoviesListAPIResult = (moviesList:[Movie] , nextPage: Int?, totalPages:Int)
+    
+    class func getMoviesList (moviesType : String, pageNumber: Int ,completion: @escaping (MoviesListAPIResult?) -> Void) {
+        let moviesURL = getMoviesListURL(moviesType: moviesType , page: pageNumber)
         Alamofire.request(moviesURL).responseJSON { response in
             var moviesList: [Movie] = []
             debugPrint(response)
@@ -24,10 +26,13 @@ class MoviesAPIService {
                         moviesList.append(Movie(movieJsonDict: movie.dictionaryObject))
                     }
                 }
-                completion(moviesList)
+                let currentPage = json["page"].int!
+                let totalPages = json["total_pages"].int!
+                let nextPage = currentPage+1 < totalPages ? currentPage+1 : nil
+                completion((moviesList , nextPage , totalPages))
             } else {
                 completion(nil)
-            }
+            }    
         }
     }
     
@@ -39,12 +44,12 @@ class MoviesAPIService {
         return "\(Constants.BACK_DROP_BASE_URL)\(imagePath)"
     }
     
-    class func getMoviesListURL(moviesType: String) -> String {
-        return appendAPIKeyToURL(url:"\(Constants.BASE_URL)\(moviesType)")
+    class func getMoviesListURL(moviesType: String , page:Int) -> String {
+        return appendAPIKeyToURL(url:"\(Constants.BASE_URL)\(moviesType)?page=\(page)")
     }
     
     class func appendAPIKeyToURL(url: String) -> String {
-        return "\(url)?api_key=\(Constants.API_KEY)"
+        return "\(url)&api_key=\(Constants.API_KEY)"
     }
 }
 
