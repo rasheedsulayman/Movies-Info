@@ -19,6 +19,8 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     var isDataLoading = false
     var tableViewLoadingMoreView:InfiniteScrollActivityView?
     var collectionViewLoadingMoreView:InfiniteScrollActivityView?
+    var loadingNotification: MBProgressHUD?
+
     
     var viewType: ViewType = .list {
         didSet {
@@ -84,56 +86,25 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
         return false
     }
     
-    
-    func showProgressHud() {
-        
+    func showLoadingIndicator()  {
+        loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+        loadingNotification!.mode = MBProgressHUDMode.indeterminate
+        loadingNotification!.isUserInteractionEnabled = false
+        loadingNotification!.label.text = "Loading Movies"
     }
     
-    func loadMovies(){
-        var loadingNotification: MBProgressHUD?
-        if isFirstLoad() {
-            loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
-            loadingNotification!.mode = MBProgressHUDMode.indeterminate
-            loadingNotification!.isUserInteractionEnabled = false
-            loadingNotification!.label.text = "Loading Movies"
-        }
-       
-        if let nextPageToLoad = nextPageToLoad {
-            MoviesAPIService.getMoviesList(moviesType: moviesType.rawValue , pageNumber: nextPageToLoad) { (moviesApiResult) in
-                if let moviesApiResult = moviesApiResult {
-                    self.nextPageToLoad = moviesApiResult.nextPage
-                    self.moviesList.append(contentsOf: moviesApiResult.moviesList)
-                    self.filteredMoviesList = self.moviesList
-                    // Update flag
-                    self.isDataLoading = false
-                    // Stop the loading indicator
-                    self.tableViewLoadingMoreView!.stopAnimating()
-                    self.collectionViewLoadingMoreView!.stopAnimating()
-                    loadingNotification?.hide(animated: true)
-                } else{
-                    print("Error getting movies ")
-                }
-            }
-        }
+  
+    
+    func stopLoadingMoreViewAnimation()  {
+        self.tableViewLoadingMoreView!.stopAnimating()
+        self.collectionViewLoadingMoreView!.stopAnimating()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-   
-    
-    /*
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
-    
     
     @IBAction func togleViewTypeClicked(_ sender: Any) {
         toggleNavBarViewTypeItem()
@@ -150,9 +121,15 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
         }
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
     
-  
-    //Mark -Searchbar
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    // MARK: - Searchbar delegates implementation
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredMoviesList =  searchText.isEmpty ? moviesList : moviesList.filter { (movie) -> Bool in
             return   movie.title!.range(of: searchText , options: .caseInsensitive) != nil
@@ -171,6 +148,33 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
     
+    
+    //Mark:- Networking
+    
+    func loadMovies(){
+        if isFirstLoad(){
+            showLoadingIndicator()
+        }else{
+            //We are using Activity indicator, instead of ProgressHUD,  to show progress  subsequent loads.
+            loadingNotification = nil
+        }
+        if let nextPageToLoad = nextPageToLoad {
+            MoviesAPIService.getMoviesList(moviesType: moviesType.rawValue , pageNumber: nextPageToLoad) { (moviesApiResult) in
+                self.loadingNotification?.hide(animated: true)
+                if let moviesApiResult = moviesApiResult {
+                    self.nextPageToLoad = moviesApiResult.nextPage
+                    self.moviesList.append(contentsOf: moviesApiResult.moviesList)
+                    self.filteredMoviesList = self.moviesList
+                    //Update ongoingLoading flag
+                    self.isDataLoading = false
+                    // Stop the loading indicator
+                    self.stopLoadingMoreViewAnimation()
+                } else{
+                    print("Error getting movies ")
+                }
+            }
+        }
+    }
     
     enum ViewType {
         case list

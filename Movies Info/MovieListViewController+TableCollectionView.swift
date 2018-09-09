@@ -1,5 +1,5 @@
 //
-//  MovieListViewController+TableCollectionViewCallBacks.swift
+//  MovieListViewController+TableAndCollectionViewCallBacks.swift
 //  Movies Info
 //
 //  Created by Rasheed Sulayman on 09/09/2018.
@@ -18,7 +18,6 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
     func setUpTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        
         //FooterActivity indicator for tableView
         //Place the new view to the buttom/end of the tableview content
         let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
@@ -117,12 +116,6 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
+ 
     
 }
