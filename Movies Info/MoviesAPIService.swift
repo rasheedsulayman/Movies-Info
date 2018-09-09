@@ -18,7 +18,7 @@ class MoviesAPIService {
         let moviesURL = getMoviesListURL(moviesType: moviesType , page: pageNumber)
         Alamofire.request(moviesURL).responseJSON { response in
             var moviesList: [Movie] = []
-            debugPrint(response)
+           debugPrint(response)
             if response.result.isSuccess {
                 let json = JSON(response.result.value!)
                 if let moviesJsonList = json["results"].array {
