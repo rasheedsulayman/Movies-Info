@@ -16,6 +16,8 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var toggleViewSwitch: UIBarButtonItem!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var connectionErrorView: UIView!
+    
     var isDataLoading = false
     var tableViewLoadingMoreView:InfiniteScrollActivityView?
     var collectionViewLoadingMoreView:InfiniteScrollActivityView?
@@ -34,8 +36,7 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
             }
         }
     }
-    
-    
+
     var moviesType = MoviesType.popular  //Defaults to popular movies
    // var planet: Planet
     var moviesList: [Movie] = []
@@ -55,6 +56,7 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
         setUpTableView()
         setUpViews()
         loadMovies()
+        connectionErrorView.layer.zPosition = 1
     }
     
     func setUpViews() {
@@ -93,7 +95,15 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
         loadingNotification!.label.text = "Loading Movies"
     }
     
-  
+    func showErrorLabel() {
+        connectionErrorView.isHidden = false
+        connectionErrorView.layer.zPosition = 1
+    }
+    
+    func dismissErrorLabel() {
+        connectionErrorView.isHidden = true
+        connectionErrorView.layer.zPosition = 0
+    }
     
     func stopLoadingMoreViewAnimation()  {
         self.tableViewLoadingMoreView!.stopAnimating()
@@ -159,17 +169,19 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
             loadingNotification = nil
         }
         if let nextPageToLoad = nextPageToLoad {
+            dismissErrorLabel()
             MoviesAPIService.getMoviesList(moviesType: moviesType.rawValue , pageNumber: nextPageToLoad) { (moviesApiResult) in
                 self.loadingNotification?.hide(animated: true)
+                //Update ongoingLoading flag
+                self.isDataLoading = false
+                self.stopLoadingMoreViewAnimation()
                 if let moviesApiResult = moviesApiResult {
                     self.nextPageToLoad = moviesApiResult.nextPage
                     self.moviesList.append(contentsOf: moviesApiResult.moviesList)
                     self.filteredMoviesList = self.moviesList
-                    //Update ongoingLoading flag
-                    self.isDataLoading = false
                     // Stop the loading indicator
-                    self.stopLoadingMoreViewAnimation()
                 } else{
+                    self.showErrorLabel()
                     print("Error getting movies ")
                 }
             }

@@ -54,7 +54,7 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (!isDataLoading) {
+        if (!isDataLoading && !isFirstLoad()) {
             if !tableView.isHidden {
                 // Calculate the position of one screen length before the bottom of the results
                 let scrollViewContentHeight = tableView.contentSize.height
@@ -71,7 +71,7 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
                     // Code to load more results
                     loadMovies()
                 }
-            } else{
+            } else {
                 //CollectionView
                 // Calculate the position of one screen length before the bottom of the results
                 let scrollViewContentHeight = collectionView.contentSize.height
