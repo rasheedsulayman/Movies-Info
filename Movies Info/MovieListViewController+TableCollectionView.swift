@@ -92,7 +92,6 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let currentMovie = filteredMoviesList[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridViewCell", for: indexPath) as! MovieGridViewCell
@@ -115,7 +114,4 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
         cell.populateViews(movie: currentMovie)
         return cell
     }
-    
- 
-    
 }

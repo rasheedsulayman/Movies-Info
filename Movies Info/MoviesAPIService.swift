@@ -36,6 +36,12 @@ class MoviesAPIService {
         }
     }
     
+
+    
+    class func getMovieDetails(movieId: Int) -> String {
+        return "\(appendAPIKeyToURL(url: "\(Constants.BASE_URL)\(movieId)", isOneQueryParam: true))&append_to_response=videos"
+    }
+    
     class func getPosterImageUrl(imagePath: String) -> String {
         return "\(Constants.POSTER_BASE_URL)\(imagePath)"
     }
@@ -45,11 +51,12 @@ class MoviesAPIService {
     }
     
     class func getMoviesListURL(moviesType: String , page:Int) -> String {
-        return appendAPIKeyToURL(url:"\(Constants.BASE_URL)\(moviesType)?page=\(page)")
+        return appendAPIKeyToURL(url:"\(Constants.BASE_URL)\(moviesType)?page=\(page)" , isOneQueryParam: false)
     }
     
-    class func appendAPIKeyToURL(url: String) -> String {
-        return "\(url)&api_key=\(Constants.API_KEY)"
+    class func appendAPIKeyToURL(url: String, isOneQueryParam: Bool) -> String {
+        let separator = isOneQueryParam ? "?" : "&"
+        return "\(url)\(separator)api_key=\(Constants.API_KEY)"
     }
 }
 

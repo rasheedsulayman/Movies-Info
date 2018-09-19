@@ -38,7 +38,6 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     }
 
     var moviesType = MoviesType.popular  //Defaults to popular movies
-   // var planet: Planet
     var moviesList: [Movie] = []
     var nextPageToLoad: Int? = 1
     
@@ -61,6 +60,7 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     
     func setUpViews() {
         searchBar.delegate = self
+        searchBar.barStyle = .blackTranslucent
     }
     
     func prepareTabItem () {
@@ -160,12 +160,11 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     
     
     //Mark:- Networking
-    
     func loadMovies(){
         if isFirstLoad(){
             showLoadingIndicator()
         }else{
-            //We are using Activity indicator, instead of ProgressHUD,  to show progress  subsequent loads.
+            //We are using Activity indicator, instead of ProgressHUD, to show progress on subsequent loads.
             loadingNotification = nil
         }
         if let nextPageToLoad = nextPageToLoad {
@@ -192,4 +191,5 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
         case list
         case grid
     }
+    
 }
