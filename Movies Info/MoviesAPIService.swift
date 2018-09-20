@@ -17,7 +17,7 @@ class MoviesAPIService {
     class func getMoviesList (moviesType : String, pageNumber: Int ,completion: @escaping (MoviesListAPIResult?) -> Void) {
         let moviesURL = getMoviesListURL(moviesType: moviesType , page: pageNumber)
         Alamofire.request(moviesURL).responseJSON { response in
-            var moviesList: [Movie] = []
+        var moviesList: [Movie] = []
            debugPrint(response)
             if response.result.isSuccess {
                 let json = JSON(response.result.value!)
@@ -36,9 +36,20 @@ class MoviesAPIService {
         }
     }
     
+    class func getMovieWithMoreDetails (movieId : Int, completion: @escaping (Movie?) -> Void) {
+        let moviesURL = getMovieDetailsUrl(movieId: movieId)
+        Alamofire.request(moviesURL).responseJSON { response in
+            debugPrint(response)
+            if response.result.isSuccess {
+                let json = JSON(response.result.value!).dictionaryObject
+                completion(Movie(movieJsonDict: json))
+            } else {
+                completion(nil)
+            }
+        }
+    }
 
-    
-    class func getMovieDetails(movieId: Int) -> String {
+    class func getMovieDetailsUrl(movieId: Int) -> String {
         return "\(appendAPIKeyToURL(url: "\(Constants.BASE_URL)\(movieId)", isOneQueryParam: true))&append_to_response=videos"
     }
     
