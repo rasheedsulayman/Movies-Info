@@ -22,10 +22,26 @@ UICollectionViewDataSource , UICollectionViewDelegate {
     @IBOutlet weak var similarMoviesCollectionView: UICollectionView!
     @IBOutlet weak var viewTrailerButton: UIButton!
     
+    func populateViews(){
+        if let backDropPath = movie.backDropImageUrl() {
+            let url = URL(string:backDropPath)!
+            posterImageView.af_setImage(withURL: url)
+        }
+        titleLabel.text = movie.title!
+        taglineLabel.text = movie.tagline!
+        ratingsLabel.text = String(format: " %.2f ", movie.voteAverage!)
+        durationLabel.text
+
+    }
     
     var movie: Movie!
     var similarMoviesList: [Movie] = []
-    var trailerKey = ""
+    var trailerKey: String! {
+        didSet {
+            viewTrailerButton.isEnabled = true
+            viewTrailerButton.isHidden = false
+        }
+    }
     
     
     override func viewDidLoad() {
@@ -51,6 +67,9 @@ UICollectionViewDataSource , UICollectionViewDelegate {
     // similarMoviesCollectionView.collectionViewLayout = columnLayout
        // similarMoviesCollectionView.contentInsetAdjustmentBehavior = .always
     }
+    
+    
+  
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

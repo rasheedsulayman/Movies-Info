@@ -16,33 +16,29 @@ struct Movie {
     var voteAverage: Double?
     var releaseDate: String? //date format pattern = " "2018-01-17"
     var id: Int?
+    var tagline: String?
+    var runtime: String?
+    
+    var duration: String? {
+        get{
+            if let runtime = runtime {
+                return "\(runtime) mins"
+            }
+            return nil
+        }
+    }
 
     init(movieJsonDict : [String : Any]?) {
         if let movieJsonDict = movieJsonDict {
-            
-            if let title =  movieJsonDict["title"] as? String{
-                self.title = title
-            }
-
-            if let id =  movieJsonDict["id"] as? Int {
-                self.id = id
-            }
-            
-            if let overview =  movieJsonDict["overview"] as? String{
-                self.overview = overview
-            }
-            if let posterPath =  movieJsonDict["poster_path"] as? String{
-                self.posterPath = posterPath
-            }
-            if let backdropPath =  movieJsonDict["backdrop_path"] as? String{
-                self.backdropPath = backdropPath
-            }
-            if let voteAverage =  movieJsonDict["vote_average"] as? Double{
-                self.voteAverage = voteAverage
-            }
-            if let releaseDate = movieJsonDict["release_date"] as? String {
-                self.releaseDate = releaseDate
-            }
+            title =  movieJsonDict["title"] as? String
+            id =  movieJsonDict["id"] as? Int
+            overview =  movieJsonDict["overview"] as? String
+            posterPath =  movieJsonDict["poster_path"] as? String
+            backdropPath =  movieJsonDict["backdrop_path"] as? String
+            voteAverage =  movieJsonDict["vote_average"] as? Double
+            releaseDate = movieJsonDict["release_date"] as? String
+            tagline = movieJsonDict["tagline"] as? String
+            runtime = movieJsonDict["runtime"] as? String
         }
     }
     
