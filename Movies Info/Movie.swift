@@ -15,17 +15,19 @@ struct Movie {
     var backdropPath: String?
     var voteAverage: Double?
     var releaseDate: String? //date format pattern = " "2018-01-17"
-    
-//    var releaseYear {
-//
-//    }
-//
-    
+    var id: Int?
+
     init(movieJsonDict : [String : Any]?) {
         if let movieJsonDict = movieJsonDict {
+            
             if let title =  movieJsonDict["title"] as? String{
                 self.title = title
             }
+
+            if let id =  movieJsonDict["id"] as? Int {
+                self.id = id
+            }
+            
             if let overview =  movieJsonDict["overview"] as? String{
                 self.overview = overview
             }
@@ -44,7 +46,7 @@ struct Movie {
         }
     }
     
-    //TODO convert this to a computed variable when internet is back
+    //TODO convert this to a computed variable when internet is restored
     func relaseYear() -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyy-MM-dd"

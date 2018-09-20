@@ -36,13 +36,39 @@ class MoviesAPIService {
         }
     }
     
-    class func getMovieWithMoreDetails (movieId : Int, completion: @escaping (Movie?) -> Void) {
+    class func getMovieTrailerKey (movieId : Int, completion: @escaping (String?) -> Void) {
         let moviesURL = getMovieDetailsUrl(movieId: movieId)
         Alamofire.request(moviesURL).responseJSON { response in
             debugPrint(response)
+            if response.result.isSuccess,
+               let resultsList = JSON(response.result.value!).dictionary?["videos"]?
+                    .dictionary?["results"]?.array {
+                    if resultsList.count > 0,  let trailerKey = resultsList[0].dictionary?["key"]?.string{
+                        completion(trailerKey)
+                    }else{
+                        completion(nil)
+                }
+                
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    
+    class func getSimilarMovies (movieId: Int , completion: @escaping ([Movie]?) -> Void) {
+        let moviesURL = getSimilarMoviesUrl(movieId:movieId)
+        Alamofire.request(moviesURL).responseJSON { response in
+            var moviesList: [Movie] = []
+            debugPrint(response)
             if response.result.isSuccess {
-                let json = JSON(response.result.value!).dictionaryObject
-                completion(Movie(movieJsonDict: json))
+                let json = JSON(response.result.value!)
+                if let moviesJsonList = json["results"].array {
+                    for movie in moviesJsonList {
+                        moviesList.append(Movie(movieJsonDict: movie.dictionaryObject))
+                    }
+                }
+                completion(moviesList)
             } else {
                 completion(nil)
             }
@@ -51,6 +77,10 @@ class MoviesAPIService {
 
     class func getMovieDetailsUrl(movieId: Int) -> String {
         return "\(appendAPIKeyToURL(url: "\(Constants.BASE_URL)\(movieId)", isOneQueryParam: true))&append_to_response=videos"
+    }
+    
+    class func  getSimilarMoviesUrl(movieId: Int) -> String{
+        return appendAPIKeyToURL(url: "\(Constants.BASE_URL)\(movieId)/similar", isOneQueryParam: true)
     }
     
     class func getPosterImageUrl(imagePath: String) -> String {
@@ -76,4 +106,5 @@ enum MoviesType: String {
     case upcoming = "upcoming"
     case nowPlaying = "now_playing"
     case topRated = "top_rated"
+    
 }

@@ -11,8 +11,6 @@ import UIKit
 class MovieDetailsViewController: UIViewController ,
 UICollectionViewDataSource , UICollectionViewDelegate {
   
-    
-
     @IBOutlet weak var backdropImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var taglineLabel: UILabel!
@@ -24,7 +22,10 @@ UICollectionViewDataSource , UICollectionViewDelegate {
     @IBOutlet weak var similarMoviesCollectionView: UICollectionView!
     @IBOutlet weak var viewTrailerButton: UIButton!
     
+    
     var movie: Movie!
+    var similarMoviesList: [Movie] = []
+    var trailerKey = ""
     
     
     override func viewDidLoad() {
@@ -53,20 +54,45 @@ UICollectionViewDataSource , UICollectionViewDelegate {
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+        return similarMoviesList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        let currentMovie = similarMoviesList[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridViewCell", for: indexPath) as! MovieGridViewCell
+        cell.populateViews(movie: currentMovie)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "MovieDetailsViewController") as! MovieDetailsViewController
+        detailController.movie = self.similarMoviesList[indexPath.row]
+        self.navigationController!.pushViewController(detailController, animated: true)
     }
     
     
-    
-    void loadMoredDetailedMovie () {
-    
+    func loadSimilarMovies () {
+        MoviesAPIService.getSimilarMovies(movieId: movie.id!) { (moviesList) in
+            if let moviesList = moviesList {
+                self.similarMoviesList.append(contentsOf: moviesList)
+                self.similarMoviesCollectionView.reloadData()
+            }else{
+                //Hide the collection view
+                //Error happened
+            }
+        }
     }
     
-    
+    func loadTrailerKey(){
+        MoviesAPIService.getMovieTrailerKey(movieId: movie.id!) { (trailerKey) in
+            if let trailerKey = trailerKey {
+                self.trailerKey = trailerKey
+            }else{
+                //Could not get the trailer key
+                //Hide the View trailers button
+            }
+        }
+    }
     
     
     /*

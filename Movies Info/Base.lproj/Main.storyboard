@@ -14,7 +14,7 @@
         <!--Movie Details View Controller-->
         <scene sceneID="6Dx-gF-ii7">
             <objects>
-                <viewController id="Foo-qs-EOz" customClass="MovieDetailsViewController" customModule="Movies_Info" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetailsViewController" id="Foo-qs-EOz" customClass="MovieDetailsViewController" customModule="Movies_Info" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hvb-zQ-IOd" userLabel="Main View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -132,13 +132,19 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        navigateToDetailsViewController(indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        navigateToDetailsViewController(indexPath: indexPath)
     }
     
+    func navigateToDetailsViewController (indexPath: IndexPath) {
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "MovieDetailsViewController") as! MovieDetailsViewController
+        detailController.movie = self.filteredMoviesList[indexPath.row]
+        self.navigationController!.pushViewController(detailController, animated: true)
+    }
+ 
     // MARK: - Searchbar delegates implementation
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredMoviesList =  searchText.isEmpty ? moviesList : moviesList.filter { (movie) -> Bool in
