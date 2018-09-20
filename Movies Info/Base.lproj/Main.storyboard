@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Movie Details View Controller-->
         <scene sceneID="6Dx-gF-ii7">
             <objects>
-                <viewController id="Foo-qs-EOz" sceneMemberID="viewController">
+                <viewController id="Foo-qs-EOz" customClass="MovieDetailsViewController" customModule="Movies_Info" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hvb-zQ-IOd" userLabel="Main View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,7 +123,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="114" id="MCy-sI-ndd"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="X0L-jq-xaD">
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="X0L-jq-xaD">
                                                     <size key="itemSize" width="80" height="114"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -200,6 +200,18 @@
                         <viewLayoutGuide key="safeArea" id="17E-h3-6sf"/>
                     </view>
                     <size key="freeformSize" width="375" height="1000"/>
+                    <connections>
+                        <outlet property="backdropImageView" destination="kEn-Hj-tAf" id="yOL-GC-jO9"/>
+                        <outlet property="durationLabel" destination="cxu-rZ-lmU" id="FI8-Wh-NEK"/>
+                        <outlet property="genresLabel" destination="Lbe-i1-Hsp" id="aRv-U7-rfm"/>
+                        <outlet property="movieSummaryLabel" destination="vT6-UC-qhJ" id="m5O-Vl-sl4"/>
+                        <outlet property="posterImageView" destination="peg-FT-WKR" id="Umb-3X-rNM"/>
+                        <outlet property="ratingsLabel" destination="6KY-4x-PIX" id="2nu-Yy-uOd"/>
+                        <outlet property="similarMoviesCollectionView" destination="EVq-Tx-HkL" id="7dT-1O-rOF"/>
+                        <outlet property="taglineLabel" destination="dBe-Ue-lPx" id="Nkb-5A-XCx"/>
+                        <outlet property="titleLabel" destination="b1P-Wz-lEF" id="18g-wb-E93"/>
+                        <outlet property="viewTrailerButton" destination="TJo-rs-CIo" id="fmv-hu-O4N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xni-gG-33O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

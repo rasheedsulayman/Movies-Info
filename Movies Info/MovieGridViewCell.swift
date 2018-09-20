@@ -11,8 +11,8 @@ import UIKit
 class MovieGridViewCell: UICollectionViewCell {
     
     @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var yearLabel: UILabel!
-    @IBOutlet weak var ratingsLabel: UILabel!
+    @IBOutlet weak var yearLabel: UILabel?
+    @IBOutlet weak var ratingsLabel: UILabel?
     
     
     func populateViews(movie: Movie) {
@@ -20,8 +20,8 @@ class MovieGridViewCell: UICollectionViewCell {
             let url = URL(string:posterPath)!
             posterImageView.af_setImage(withURL: url)
         }
-        yearLabel.text = movie.relaseYear()
-        ratingsLabel.text = String(format: " %.2f ", movie.voteAverage!)
+        yearLabel?.text = movie.relaseYear()
+        ratingsLabel?.text = String(format: " %.2f ", movie.voteAverage!)
     }
     
 }
