@@ -22,18 +22,6 @@ UICollectionViewDataSource , UICollectionViewDelegate {
     @IBOutlet weak var similarMoviesCollectionView: UICollectionView!
     @IBOutlet weak var viewTrailerButton: UIButton!
     
-    func populateViews(){
-        if let backDropPath = movie.backDropImageUrl() {
-            let url = URL(string:backDropPath)!
-            posterImageView.af_setImage(withURL: url)
-        }
-        titleLabel.text = movie.title!
-        taglineLabel.text = movie.tagline!
-        ratingsLabel.text = String(format: " %.2f ", movie.voteAverage!)
-        durationLabel.text
-
-    }
-    
     var movie: Movie!
     var similarMoviesList: [Movie] = []
     var trailerKey: String! {
@@ -46,8 +34,10 @@ UICollectionViewDataSource , UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        populateViews()
+        setUpCollectionView()
+        loadSimilarMovies()
+        loadTrailerKey()
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,8 +59,24 @@ UICollectionViewDataSource , UICollectionViewDelegate {
     }
     
     
-  
-
+    func populateViews(){
+        if let backDropPath = movie.backDropImageUrl() {
+            let url = URL(string:backDropPath)!
+            backdropImageView.af_setImage(withURL: url)
+        }
+        if let posterPath = movie.posterImageUrl() {
+            let url = URL(string:posterPath)!
+            posterImageView.af_setImage(withURL: url)
+        }
+        titleLabel.text = movie.title
+        taglineLabel.text = movie.tagline
+        ratingsLabel.text = String(format: " %.2f ", movie.voteAverage!)
+        durationLabel.text = movie.duration
+        genresLabel.text = movie.genres
+        movieSummaryLabel.text = movie.overview
+    }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return similarMoviesList.count

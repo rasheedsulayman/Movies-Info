@@ -18,6 +18,7 @@ struct Movie {
     var id: Int?
     var tagline: String?
     var runtime: String?
+    var genres: String?
     
     var duration: String? {
         get{
@@ -39,10 +40,23 @@ struct Movie {
             releaseDate = movieJsonDict["release_date"] as? String
             tagline = movieJsonDict["tagline"] as? String
             runtime = movieJsonDict["runtime"] as? String
+            if let genresList = movieJsonDict["genres"] as? [[String: Any]]{
+                genres = buildGenresList(genresList: genresList)
+            }
         }
     }
     
-    //TODO convert this to a computed variable when internet is restored
+    
+    func buildGenresList(genresList: [[String: Any]]) -> String {
+        var  genresToReturn = ""
+        for genres in genresList {
+            if let name =  genres["name"]{
+                genresToReturn.append(contentsOf: " \(name)")
+            }
+        }
+        return genresToReturn
+    }
+    
     func relaseYear() -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyy-MM-dd"

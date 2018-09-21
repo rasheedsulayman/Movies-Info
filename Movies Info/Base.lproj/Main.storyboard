@@ -19,11 +19,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJT-L9-xhz">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJT-L9-xhz">
                                 <rect key="frame" x="0.0" y="20" width="375" height="980"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a48-AW-FN2" userLabel="Scrollable Content View">
-                                        <rect key="frame" x="8" y="8" width="375" height="748"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="748"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="carrebean" translatesAutoresizingMaskIntoConstraints="NO" id="kEn-Hj-tAf">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
@@ -98,7 +98,7 @@
                                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vT6-UC-qhJ" userLabel="Movie Details Label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vT6-UC-qhJ" userLabel="Movie Details Label">
                                                 <rect key="frame" x="16" y="491.5" width="351" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -130,7 +130,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="RHq-Zo-bu1" customClass="MovieGridViewCell" customModule="Movies_Info" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieGridViewCell" id="RHq-Zo-bu1" customClass="MovieGridViewCell" customModule="Movies_Info" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="114"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -150,6 +150,9 @@
                                                             <constraint firstItem="q9q-do-dyP" firstAttribute="centerX" secondItem="RHq-Zo-bu1" secondAttribute="centerX" id="D3K-6A-sUU"/>
                                                             <constraint firstItem="q9q-do-dyP" firstAttribute="centerY" secondItem="RHq-Zo-bu1" secondAttribute="centerY" id="aLB-aV-2i1"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outlet property="posterImageView" destination="q9q-do-dyP" id="XtW-AB-l9N"/>
+                                                        </connections>
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
@@ -182,11 +185,10 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="a48-AW-FN2" firstAttribute="leading" secondItem="sJT-L9-xhz" secondAttribute="leadingMargin" id="2Vq-tQ-lNv"/>
-                                    <constraint firstItem="a48-AW-FN2" firstAttribute="width" secondItem="sJT-L9-xhz" secondAttribute="width" id="Aq6-lb-toU"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="a48-AW-FN2" secondAttribute="trailing" id="DsY-Df-nYc"/>
-                                    <constraint firstItem="a48-AW-FN2" firstAttribute="top" secondItem="sJT-L9-xhz" secondAttribute="topMargin" id="WDQ-fl-O8w"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="a48-AW-FN2" secondAttribute="bottom" id="pou-Fx-bdq"/>
+                                    <constraint firstAttribute="bottom" secondItem="a48-AW-FN2" secondAttribute="bottom" id="Ku3-6Y-ZfX"/>
+                                    <constraint firstItem="a48-AW-FN2" firstAttribute="leading" secondItem="sJT-L9-xhz" secondAttribute="leading" id="jfa-ub-MHQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="a48-AW-FN2" secondAttribute="trailing" id="yA7-j6-sTC"/>
+                                    <constraint firstItem="a48-AW-FN2" firstAttribute="top" secondItem="sJT-L9-xhz" secondAttribute="top" id="zk2-DU-gtT"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -196,6 +198,7 @@
                             <constraint firstItem="sJT-L9-xhz" firstAttribute="top" secondItem="17E-h3-6sf" secondAttribute="top" id="IyG-6V-Feh"/>
                             <constraint firstItem="sJT-L9-xhz" firstAttribute="leading" secondItem="17E-h3-6sf" secondAttribute="leading" id="KVb-uI-5XQ"/>
                             <constraint firstItem="17E-h3-6sf" firstAttribute="bottom" secondItem="sJT-L9-xhz" secondAttribute="bottom" id="VFz-Y6-fDP"/>
+                            <constraint firstItem="a48-AW-FN2" firstAttribute="width" secondItem="hvb-zQ-IOd" secondAttribute="width" id="diy-TC-I3v"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="17E-h3-6sf"/>
                     </view>
