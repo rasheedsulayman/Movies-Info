@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 struct Movie {
     var title: String?
@@ -17,8 +18,9 @@ struct Movie {
     var releaseDate: String? //date format pattern = " "2018-01-17"
     var id: Int?
     var tagline: String?
-    var runtime: String?
+    var runtime: Int?
     var genres: String?
+    var trailerKey: String?
     
     var duration: String? {
         get{
@@ -28,9 +30,9 @@ struct Movie {
             return nil
         }
     }
-
-    init(movieJsonDict : [String : Any]?) {
-        if let movieJsonDict = movieJsonDict {
+    
+    init(movieJson: JSON) {
+        if let movieJsonDict = movieJson.dictionaryObject {
             title =  movieJsonDict["title"] as? String
             id =  movieJsonDict["id"] as? Int
             overview =  movieJsonDict["overview"] as? String
@@ -39,12 +41,20 @@ struct Movie {
             voteAverage =  movieJsonDict["vote_average"] as? Double
             releaseDate = movieJsonDict["release_date"] as? String
             tagline = movieJsonDict["tagline"] as? String
-            runtime = movieJsonDict["runtime"] as? String
+            runtime = movieJsonDict["runtime"] as? Int
             if let genresList = movieJsonDict["genres"] as? [[String: Any]]{
-                genres = buildGenresList(genresList: genresList)
+                genres = self.buildGenresList(genresList: genresList)
+            }
+        }
+        //Trying to get youtube link
+        if let resultsList = movieJson.dictionary?["videos"]?
+            .dictionary?["results"]?.array {
+            if resultsList.count > 0,  let trailerKey = resultsList[0].dictionary?["key"]?.string{
+                self.trailerKey = trailerKey
             }
         }
     }
+    
     
     
     func buildGenresList(genresList: [[String: Any]]) -> String {
@@ -68,14 +78,14 @@ struct Movie {
         return nil
     }
     
-     func posterImageUrl() -> String? {
+    func posterImageUrl() -> String? {
         if let posterPath = posterPath {
             return "\(Constants.POSTER_BASE_URL)\(posterPath)"
         }
         return nil
     }
     
-     func backDropImageUrl() -> String? {
+    func backDropImageUrl() -> String? {
         if let backdropPath = backdropPath {
             return "\(Constants.BACK_DROP_BASE_URL)\(backdropPath)"
         }

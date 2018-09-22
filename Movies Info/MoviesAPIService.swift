@@ -13,17 +13,15 @@ import SwiftyJSON
 class MoviesAPIService {
     
     typealias MoviesListAPIResult = (moviesList:[Movie] , nextPage: Int?, totalPages:Int)
-    
     class func getMoviesList (moviesType : String, pageNumber: Int ,completion: @escaping (MoviesListAPIResult?) -> Void) {
         let moviesURL = getMoviesListURL(moviesType: moviesType , page: pageNumber)
         Alamofire.request(moviesURL).responseJSON { response in
-        var moviesList: [Movie] = []
-           debugPrint(response)
+            var moviesList: [Movie] = []
             if response.result.isSuccess {
                 let json = JSON(response.result.value!)
                 if let moviesJsonList = json["results"].array {
                     for movie in moviesJsonList {
-                        moviesList.append(Movie(movieJsonDict: movie.dictionaryObject))
+                        moviesList.append(Movie(movieJson: movie))
                     }
                 }
                 let currentPage = json["page"].int!
@@ -36,28 +34,21 @@ class MoviesAPIService {
         }
     }
     
-    class func getMovieTrailerKey (movieId : Int, completion: @escaping (String?) -> Void) {
+    class func getMoredDetailedMovie (movieId : Int, completion: @escaping (Movie?) -> Void) {
         let moviesURL = getMovieDetailsUrl(movieId: movieId)
         Alamofire.request(moviesURL).responseJSON { response in
-            debugPrint(response)
-            if response.result.isSuccess,
-               let resultsList = JSON(response.result.value!).dictionary?["videos"]?
-                    .dictionary?["results"]?.array {
-                    if resultsList.count > 0,  let trailerKey = resultsList[0].dictionary?["key"]?.string{
-                        completion(trailerKey)
-                    }else{
-                        completion(nil)
-                }
-                
-            } else {
+            if response.result.isSuccess{
+                completion (Movie(movieJson: JSON(response.result.value!)))
+            }
+            else{
                 completion(nil)
             }
         }
     }
     
-    
     class func getSimilarMovies (movieId: Int , completion: @escaping ([Movie]?) -> Void) {
         let moviesURL = getSimilarMoviesUrl(movieId:movieId)
+        print("About to get similar movies")
         Alamofire.request(moviesURL).responseJSON { response in
             var moviesList: [Movie] = []
             debugPrint(response)
@@ -65,7 +56,7 @@ class MoviesAPIService {
                 let json = JSON(response.result.value!)
                 if let moviesJsonList = json["results"].array {
                     for movie in moviesJsonList {
-                        moviesList.append(Movie(movieJsonDict: movie.dictionaryObject))
+                        moviesList.append(Movie(movieJson: movie))
                     }
                 }
                 completion(moviesList)
@@ -74,7 +65,7 @@ class MoviesAPIService {
             }
         }
     }
-
+    
     class func getMovieDetailsUrl(movieId: Int) -> String {
         return "\(appendAPIKeyToURL(url: "\(Constants.BASE_URL)\(movieId)", isOneQueryParam: true))&append_to_response=videos"
     }

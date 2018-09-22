@@ -71,7 +71,7 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
             tabItem.title = "Now Playing"
         case .popular:
             title = "Popular"
-            tabItem.title = "Popular"
+            tabItem.title = "Popular" 
         case .topRated:
             title = "Top rated"
             tabItem.title = "Top Rated"
@@ -82,7 +82,7 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     }
     
     func isFirstLoad() -> Bool {
-        if let nextPageToLoad = nextPageToLoad{
+        if let nextPageToLoad = nextPageToLoad {
             return nextPageToLoad == 1
         }
         return false
@@ -184,7 +184,6 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
                     self.nextPageToLoad = moviesApiResult.nextPage
                     self.moviesList.append(contentsOf: moviesApiResult.moviesList)
                     self.filteredMoviesList = self.moviesList
-                    // Stop the loading indicator
                 } else{
                     self.showErrorLabel()
                     print("Error getting movies ")

@@ -24,12 +24,6 @@ UICollectionViewDataSource , UICollectionViewDelegate {
     
     var movie: Movie!
     var similarMoviesList: [Movie] = []
-    var trailerKey: String! {
-        didSet {
-            viewTrailerButton.isEnabled = true
-            viewTrailerButton.isHidden = false
-        }
-    }
     
     
     override func viewDidLoad() {
@@ -60,6 +54,7 @@ UICollectionViewDataSource , UICollectionViewDelegate {
     
     
     func populateViews(){
+        title = movie.title
         if let backDropPath = movie.backDropImageUrl() {
             let url = URL(string:backDropPath)!
             backdropImageView.af_setImage(withURL: url)
@@ -72,11 +67,10 @@ UICollectionViewDataSource , UICollectionViewDelegate {
         taglineLabel.text = movie.tagline
         ratingsLabel.text = String(format: " %.2f ", movie.voteAverage!)
         durationLabel.text = movie.duration
+        print("The movie duration is detail view is: \(String(describing: movie.duration))" )
         genresLabel.text = movie.genres
         movieSummaryLabel.text = movie.overview
     }
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return similarMoviesList.count
@@ -95,13 +89,14 @@ UICollectionViewDataSource , UICollectionViewDelegate {
         self.navigationController!.pushViewController(detailController, animated: true)
     }
     
-    
     func loadSimilarMovies () {
         MoviesAPIService.getSimilarMovies(movieId: movie.id!) { (moviesList) in
             if let moviesList = moviesList {
+                print("Similar movies gotten and the length is \(moviesList.count)")
                 self.similarMoviesList.append(contentsOf: moviesList)
                 self.similarMoviesCollectionView.reloadData()
             }else{
+                print("Error in getting similar movies")
                 //Hide the collection view
                 //Error happened
             }
@@ -109,9 +104,12 @@ UICollectionViewDataSource , UICollectionViewDelegate {
     }
     
     func loadTrailerKey(){
-        MoviesAPIService.getMovieTrailerKey(movieId: movie.id!) { (trailerKey) in
-            if let trailerKey = trailerKey {
-                self.trailerKey = trailerKey
+        MoviesAPIService.getMoredDetailedMovie(movieId: movie.id!) { (movie) in
+            if let movie = movie {
+                self.movie = movie
+                self.populateViews()
+                self.viewTrailerButton.isEnabled = true
+                self.viewTrailerButton.isHidden = false
             }else{
                 //Could not get the trailer key
                 //Hide the View trailers button
