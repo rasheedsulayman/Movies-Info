@@ -50,17 +50,20 @@ UICollectionViewDataSource , UICollectionViewDelegate {
         title = movie.title
         if let backDropPath = movie.backDropImageUrl() {
             let url = URL(string:backDropPath)!
-            backdropImageView.af_setImage(withURL: url)
+            backdropImageView.af_setImage(
+                withURL: url,
+                placeholderImage: UIImage(named: "movie100brown")!,
+                imageTransition: .crossDissolve(0.2)
+            )
         }
         if let posterPath = movie.posterImageUrl() {
             let url = URL(string:posterPath)!
-            posterImageView.af_setImage(withURL: url)
+            posterImageView.af_setImage(withURL: url,imageTransition: .crossDissolve(0.2) )
         }
         titleLabel.text = movie.title
         taglineLabel.text = movie.tagline
         ratingsLabel.text = String(format: " %.2f ", movie.voteAverage!)
         durationLabel.text = movie.duration
-        print("The movie duration is detail view is: \(String(describing: movie.duration))" )
         genresLabel.text = movie.genres
         movieSummaryLabel.text = movie.overview
     }

@@ -25,7 +25,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a48-AW-FN2" userLabel="Scrollable Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="766"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="carrebean" translatesAutoresizingMaskIntoConstraints="NO" id="kEn-Hj-tAf">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movie100grey" translatesAutoresizingMaskIntoConstraints="NO" id="kEn-Hj-tAf">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="300" id="XKv-r9-8QH"/>
@@ -498,7 +498,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="carrebean" width="167" height="94"/>
         <image name="grid" width="26" height="26"/>
+        <image name="movie100grey" width="50" height="50"/>
     </resources>
 </document>

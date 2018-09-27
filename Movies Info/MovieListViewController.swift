@@ -37,7 +37,7 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
         }
     }
 
-    var moviesType = MoviesType.popular  //Defaults to popular movies
+    var moviesType = MoviesType.popular    //Defaults to popular movies
     var moviesList: [Movie] = []
     var nextPageToLoad: Int? = 1
     
@@ -94,9 +94,8 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     }
     
     func showLoadingIndicator()  {
-        loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+        loadingNotification = MBProgressHUD.showAdded(to: (navigationController?.topViewController?.view)!, animated: true)
         loadingNotification!.mode = MBProgressHUDMode.indeterminate
-        loadingNotification!.isUserInteractionEnabled = false
         loadingNotification!.label.text = "Loading Movies"
     }
     

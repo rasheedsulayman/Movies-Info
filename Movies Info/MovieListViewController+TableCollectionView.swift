@@ -28,6 +28,8 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
         var insets = tableView.contentInset
         insets.bottom += InfiniteScrollActivityView.defaultHeight
         tableView.contentInset = insets
+        
+    
     }
     
     
