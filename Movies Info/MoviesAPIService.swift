@@ -13,6 +13,7 @@ import SwiftyJSON
 class MoviesAPIService {
     
     typealias MoviesListAPIResult = (moviesList:[Movie] , nextPage: Int?, totalPages:Int)
+    
     class func getMoviesList (moviesType : String, pageNumber: Int ,completion: @escaping (MoviesListAPIResult?) -> Void) {
         let moviesURL = getMoviesListURL(moviesType: moviesType , page: pageNumber)
         Alamofire.request(moviesURL).responseJSON { response in
@@ -34,7 +35,7 @@ class MoviesAPIService {
         }
     }
     
-    class func getMoredDetailedMovie (movieId : Int, completion: @escaping (Movie?) -> Void) {
+    class func getMoreDetailedMovie (movieId : Int, completion: @escaping (Movie?) -> Void) {
         let moviesURL = getMovieDetailsUrl(movieId: movieId)
         Alamofire.request(moviesURL).responseJSON { response in
             if response.result.isSuccess{
@@ -97,5 +98,4 @@ enum MoviesType: String {
     case upcoming = "upcoming"
     case nowPlaying = "now_playing"
     case topRated = "top_rated"
-    
 }

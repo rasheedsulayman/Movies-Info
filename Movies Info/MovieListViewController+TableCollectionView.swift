@@ -85,7 +85,7 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
                     collectionViewLoadingMoreView?.frame = frame
                     collectionViewLoadingMoreView!.startAnimating()
                     
-                    // Code to load more results
+                    // load more movies.
                     loadMovies()
                 }
             }

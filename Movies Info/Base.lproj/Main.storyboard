@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="980"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a48-AW-FN2" userLabel="Scrollable Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="748"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="766"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="carrebean" translatesAutoresizingMaskIntoConstraints="NO" id="kEn-Hj-tAf">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
@@ -110,12 +110,21 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJo-rs-CIo">
-                                                <rect key="frame" x="16" y="702" width="343" height="30"/>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJo-rs-CIo" customClass="RoundedButton" customModule="Movies_Info" customModuleProvider="target">
+                                                <rect key="frame" x="32" y="710" width="311" height="40"/>
                                                 <color key="backgroundColor" red="0.57380741830000004" green="0.56553578380000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="PLL-Wk-N9r"/>
+                                                </constraints>
                                                 <state key="normal" title="View Trailer">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="rounded" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onViewTrailerButtonClicked:" destination="Foo-qs-EOz" eventType="touchUpInside" id="rQV-QE-TQp"/>
+                                                </connections>
                                             </button>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="EVq-Tx-HkL">
                                                 <rect key="frame" x="16" y="572" width="343" height="114"/>
@@ -161,7 +170,7 @@
                                         <constraints>
                                             <constraint firstItem="5ce-aC-96v" firstAttribute="top" secondItem="kEn-Hj-tAf" secondAttribute="bottom" constant="10" id="2at-Sg-OYH"/>
                                             <constraint firstItem="vT6-UC-qhJ" firstAttribute="top" secondItem="RrY-fv-3cT" secondAttribute="bottom" constant="16" id="9Ec-uA-W7f"/>
-                                            <constraint firstAttribute="trailing" secondItem="TJo-rs-CIo" secondAttribute="trailing" constant="16" id="Bb2-2U-SKM"/>
+                                            <constraint firstAttribute="trailing" secondItem="TJo-rs-CIo" secondAttribute="trailing" constant="32" id="Bb2-2U-SKM"/>
                                             <constraint firstAttribute="trailing" secondItem="RrY-fv-3cT" secondAttribute="trailing" id="CVz-sg-XQ0"/>
                                             <constraint firstItem="uZb-pG-1dC" firstAttribute="top" secondItem="vT6-UC-qhJ" secondAttribute="bottom" constant="16" id="F6O-8H-Kwv"/>
                                             <constraint firstAttribute="bottom" secondItem="TJo-rs-CIo" secondAttribute="bottom" constant="16" id="FeH-nj-jbL"/>
@@ -173,13 +182,13 @@
                                             <constraint firstAttribute="trailing" secondItem="uZb-pG-1dC" secondAttribute="trailing" constant="16" id="cNp-Pr-6eL"/>
                                             <constraint firstItem="EVq-Tx-HkL" firstAttribute="top" secondItem="uZb-pG-1dC" secondAttribute="bottom" constant="16" id="ezd-hi-qAh"/>
                                             <constraint firstAttribute="trailing" secondItem="5ce-aC-96v" secondAttribute="trailing" id="fU7-mM-GHH"/>
-                                            <constraint firstItem="TJo-rs-CIo" firstAttribute="top" secondItem="EVq-Tx-HkL" secondAttribute="bottom" constant="16" id="gZT-4c-ISe"/>
+                                            <constraint firstItem="TJo-rs-CIo" firstAttribute="top" secondItem="EVq-Tx-HkL" secondAttribute="bottom" constant="24" id="gZT-4c-ISe"/>
                                             <constraint firstItem="RrY-fv-3cT" firstAttribute="leading" secondItem="a48-AW-FN2" secondAttribute="leading" constant="16" id="gZU-KV-Pdh"/>
                                             <constraint firstItem="RrY-fv-3cT" firstAttribute="top" secondItem="5ce-aC-96v" secondAttribute="bottom" constant="10" id="lA0-Wc-bD9"/>
                                             <constraint firstItem="kEn-Hj-tAf" firstAttribute="top" secondItem="a48-AW-FN2" secondAttribute="top" id="q96-kK-ec3"/>
                                             <constraint firstAttribute="trailing" secondItem="EVq-Tx-HkL" secondAttribute="trailing" constant="16" id="qjp-Ti-qz9"/>
                                             <constraint firstAttribute="trailing" secondItem="vT6-UC-qhJ" secondAttribute="trailing" constant="8" id="r9s-1I-lr0"/>
-                                            <constraint firstItem="TJo-rs-CIo" firstAttribute="leading" secondItem="a48-AW-FN2" secondAttribute="leading" constant="16" id="rGI-uq-0UH"/>
+                                            <constraint firstItem="TJo-rs-CIo" firstAttribute="leading" secondItem="a48-AW-FN2" secondAttribute="leading" constant="32" id="rGI-uq-0UH"/>
                                             <constraint firstItem="uZb-pG-1dC" firstAttribute="leading" secondItem="a48-AW-FN2" secondAttribute="leading" constant="16" id="xjh-kc-sws"/>
                                         </constraints>
                                     </view>
@@ -256,7 +265,7 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieListViewCell" rowHeight="130" id="Yym-HA-mbL" customClass="MovieListViewCell" customModule="Movies_Info" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MovieListViewCell" rowHeight="130" id="Yym-HA-mbL" customClass="MovieListViewCell" customModule="Movies_Info" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yym-HA-mbL" id="7yj-Ke-z99">
@@ -425,7 +434,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="liM-Vy-mnx">
                         <barButtonItem key="leftBarButtonItem" title="Grid" id="dIz-s6-VBx">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" red="0.57380741830000004" green="0.56553578380000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="togleViewTypeClicked:" destination="lLS-NN-n3X" id="af7-1e-mKZ"/>
                             </connections>
@@ -452,6 +461,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="selectedImageTintColor" red="0.57380741830000004" green="0.56553578380000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="Apg-gl-xIv" kind="relationship" relationship="viewControllers" id="Pv3-FM-lgo"/>
@@ -466,7 +476,7 @@
             <objects>
                 <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Apg-gl-xIv" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Testit" id="A3w-Ua-XOO">
-                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="badgeColor" red="0.57380741830000004" green="0.56553578380000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rUL-GZ-oTG">

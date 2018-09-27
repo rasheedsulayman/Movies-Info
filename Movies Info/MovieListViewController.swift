@@ -65,19 +65,24 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     
     func prepareTabItem () {
         let tabItem = navigationController!.tabBarItem!
+        
         switch moviesType {
         case .nowPlaying:
             title = "Now Playing"
-            tabItem.title = "Now Playing"
+            tabItem.title = title
+            tabItem.image = UIImage(named: "nowplaying")
         case .popular:
             title = "Popular"
-            tabItem.title = "Popular" 
+            tabItem.title = title
+            tabItem.image = UIImage(named: "popular")
         case .topRated:
-            title = "Top rated"
-            tabItem.title = "Top Rated"
+            title = "Top Rated"
+            tabItem.title = title
+            tabItem.image = UIImage(named: "topratedicon")
         case .upcoming:
             title  = "Upcoming"
-            tabItem.title = "Upcoming"
+            tabItem.title = title
+            tabItem.image = UIImage(named: "upcoming")
         }
     }
     
@@ -123,10 +128,12 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     func toggleNavBarViewTypeItem(){
         switch viewType {
         case .grid:
-            toggleViewSwitch.title = "Grid"
+            toggleViewSwitch.image = UIImage(named:"grid")
+            //toggleViewSwitch.title = "Grid"
             viewType = .list
         case.list:
-            toggleViewSwitch.title = "List"
+            toggleViewSwitch.image = UIImage(named:"list")
+           // toggleViewSwitch.title = "List"
             viewType = .grid
         }
     }

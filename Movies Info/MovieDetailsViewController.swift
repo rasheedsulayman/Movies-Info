@@ -31,7 +31,7 @@ UICollectionViewDataSource , UICollectionViewDelegate {
         populateViews()
         setUpCollectionView()
         loadSimilarMovies()
-        loadTrailerKey()
+        loadMoreDetailedMovie()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,13 +43,6 @@ UICollectionViewDataSource , UICollectionViewDelegate {
     func setUpCollectionView() {
         similarMoviesCollectionView.dataSource = self
         similarMoviesCollectionView.delegate = self
-//        let columnLayout = ColumnFlowLayout(
-//            cellsPerRow: 2,
-//            minimumInteritemSpacing: 10,
-//            minimumLineSpacing: 10,
-//            sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-    // similarMoviesCollectionView.collectionViewLayout = columnLayout
-       // similarMoviesCollectionView.contentInsetAdjustmentBehavior = .always
     }
     
     
@@ -103,20 +96,32 @@ UICollectionViewDataSource , UICollectionViewDelegate {
         }
     }
     
-    func loadTrailerKey(){
-        MoviesAPIService.getMoredDetailedMovie(movieId: movie.id!) { (movie) in
+    func loadMoreDetailedMovie(){
+        MoviesAPIService.getMoreDetailedMovie(movieId: movie.id!) { (movie) in
             if let movie = movie {
                 self.movie = movie
                 self.populateViews()
                 self.viewTrailerButton.isEnabled = true
                 self.viewTrailerButton.isHidden = false
             }else{
+                //Fail silently
                 //Could not get the trailer key
                 //Hide the View trailers button
+                
             }
         }
     }
     
+    
+    @IBAction func onViewTrailerButtonClicked(_ sender: Any) {
+        if let trailerKey = movie.trailerKey {
+            var url = URL(string:"youtube://\(trailerKey)")!
+            if !UIApplication.shared.canOpenURL(url)  {
+                url = URL(string:"http://www.youtube.com/watch?v=\(trailerKey)")!
+            }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
     
     /*
     // MARK: - Navigation

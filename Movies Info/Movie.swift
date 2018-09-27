@@ -56,7 +56,6 @@ struct Movie {
     }
     
     
-    
     func buildGenresList(genresList: [[String: Any]]) -> String {
         var  genresToReturn = ""
         for genres in genresList {
