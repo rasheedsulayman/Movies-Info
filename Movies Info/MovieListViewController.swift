@@ -129,11 +129,9 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
         switch viewType {
         case .grid:
             toggleViewSwitch.image = UIImage(named:"grid")
-            //toggleViewSwitch.title = "Grid"
             viewType = .list
         case.list:
             toggleViewSwitch.image = UIImage(named:"list")
-           // toggleViewSwitch.title = "List"
             viewType = .grid
         }
     }
