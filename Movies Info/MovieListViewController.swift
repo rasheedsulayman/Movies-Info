@@ -22,6 +22,10 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     var tableViewLoadingMoreView:InfiniteScrollActivityView?
     var collectionViewLoadingMoreView:InfiniteScrollActivityView?
     var loadingNotification: MBProgressHUD?
+    var tableViewRefreshControl: UIRefreshControl!
+    var collectionViewRefreshControl: UIRefreshControl!
+    var isUserRefreshing = false
+
 
     
     var viewType: ViewType = .list {
@@ -45,20 +49,23 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
         didSet {
             collectionView.reloadData()
             tableView.reloadData()
+            print("Fileterd movie list length \(filteredMoviesList.count)")
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setUpViews()
         setUpCollectionView()
         setUpTableView()
-        setUpViews()
         loadMovies()
         connectionErrorView.layer.zPosition = 1
     }
     
     func setUpViews() {
+        tableViewRefreshControl = UIRefreshControl()
+        collectionViewRefreshControl = UIRefreshControl()
         searchBar.delegate = self
         searchBar.barStyle = .blackTranslucent
     }
@@ -169,9 +176,17 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     }
     
     
+    @objc func onRefresh(){
+        print("OnRefresh called")
+        nextPageToLoad = 1 //
+        isUserRefreshing = true
+        loadMovies()
+    }
+    
+    
     //Mark:- Networking
     func loadMovies(){
-        if isFirstLoad(){
+        if isFirstLoad() {
             showLoadingIndicator()
         }else{
             //We are using Activity indicator, instead of ProgressHUD, to show progress on subsequent loads.
@@ -186,6 +201,10 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
                 self.stopLoadingMoreViewAnimation()
                 if let moviesApiResult = moviesApiResult {
                     self.nextPageToLoad = moviesApiResult.nextPage
+                    if self.isUserRefreshing {
+                        self.moviesList.removeAll()
+                        self.endRefreshControl()
+                    }
                     self.moviesList.append(contentsOf: moviesApiResult.moviesList)
                     self.filteredMoviesList = self.moviesList
                 } else{
@@ -194,6 +213,13 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
                 }
             }
         }
+    }
+    
+    func endRefreshControl(){
+        collectionViewRefreshControl.endRefreshing()
+       tableViewRefreshControl.endRefreshing()
+       isUserRefreshing = false
+
     }
     
     enum ViewType {

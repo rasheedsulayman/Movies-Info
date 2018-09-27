@@ -18,6 +18,8 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
     func setUpTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+    
+        
         //FooterActivity indicator for tableView
         //Place the new view to the buttom/end of the tableview content
         let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
@@ -29,13 +31,16 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
         insets.bottom += InfiniteScrollActivityView.defaultHeight
         tableView.contentInset = insets
         
-    
+        tableView.insertSubview(tableViewRefreshControl, at: 0)
+        tableViewRefreshControl.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
     }
     
     
     func setUpCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
+
+        //flow layout
         let columnLayout = ColumnFlowLayout(
             cellsPerRow: 2,
             minimumInteritemSpacing: 10,
@@ -51,6 +56,10 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
         var insets = collectionView.contentInset
         insets.bottom += InfiniteScrollActivityView.defaultHeight
         collectionView.contentInset = insets
+        
+        //Refresh control
+        collectionView.insertSubview(collectionViewRefreshControl, at: 0)
+        collectionViewRefreshControl.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
     }
     
     
