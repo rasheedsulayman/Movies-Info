@@ -13,13 +13,10 @@ import UIKit
 extension MovieListViewController: UICollectionViewDelegate , UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
     
-    //Mark: - Collectionview and TableView methods methods
-    
+    //Mark: - Collectionview and TableView methods methods    
     func setUpTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-    
-        
         //FooterActivity indicator for tableView
         //Place the new view to the buttom/end of the tableview content
         let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
@@ -61,8 +58,6 @@ UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
         collectionView.insertSubview(collectionViewRefreshControl, at: 0)
         collectionViewRefreshControl.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
     }
-    
-    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (!isDataLoading && !isFirstLoad()) {

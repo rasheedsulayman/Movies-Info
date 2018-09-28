@@ -38,5 +38,4 @@ class ColumnFlowLayout: UICollectionViewFlowLayout {
         context.invalidateFlowLayoutDelegateMetrics = newBounds.size != collectionView?.bounds.size
         return context
     }
-    
 }

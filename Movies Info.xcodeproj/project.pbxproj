@@ -62,6 +62,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0413BF1B215DE5A600BE0258 /* MovieList */ = {
+			isa = PBXGroup;
+			children = (
+				04C6D108211CF548006883C5 /* MovieListViewController.swift */,
+				041ABC482144BA3100A27FBF /* MovieListViewController+TableCollectionView.swift */,
+			);
+			path = MovieList;
+			sourceTree = "<group>";
+		};
+		0413BF1C215DE5C600BE0258 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				04C6D10A211CFB80006883C5 /* Movie.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		0413BF1D215DE5D200BE0258 /* customviews */ = {
+			isa = PBXGroup;
+			children = (
+				04C6D10E211F156C006883C5 /* ColumnFlowLayout.swift */,
+				0413BF19215C3A3A00BE0258 /* RoundedButton.swift */,
+				0432501321446FB300335257 /* InfiniteScrollActivityView.swift */,
+			);
+			path = customviews;
+			sourceTree = "<group>";
+		};
+		0413BF1E215DE5F700BE0258 /* viewcells */ = {
+			isa = PBXGroup;
+			children = (
+				04B6BB57210DDE8900410021 /* MovieGridViewCell.swift */,
+				04C6D110211F84EA006883C5 /* MovieListViewCell.swift */,
+			);
+			path = viewcells;
+			sourceTree = "<group>";
+		};
+		0413BF1F215DE61500BE0258 /* moviedetails */ = {
+			isa = PBXGroup;
+			children = (
+				04962EF621541AE500A5EF65 /* MovieDetailsViewController.swift */,
+			);
+			path = moviedetails;
+			sourceTree = "<group>";
+		};
 		0467B7EB210CB985007AF457 = {
 			isa = PBXGroup;
 			children = (
@@ -83,19 +127,15 @@
 		0467B7F6210CB986007AF457 /* Movies Info */ = {
 			isa = PBXGroup;
 			children = (
+				0413BF1F215DE61500BE0258 /* moviedetails */,
+				0413BF1E215DE5F700BE0258 /* viewcells */,
+				0413BF1D215DE5D200BE0258 /* customviews */,
+				0413BF1C215DE5C600BE0258 /* models */,
+				0413BF1B215DE5A600BE0258 /* MovieList */,
 				0467B7F7210CB986007AF457 /* AppDelegate.swift */,
 				0467B7F9210CB986007AF457 /* MoviesTabBarContorller.swift */,
-				04C6D10E211F156C006883C5 /* ColumnFlowLayout.swift */,
-				04C6D10A211CFB80006883C5 /* Movie.swift */,
-				041ABC482144BA3100A27FBF /* MovieListViewController+TableCollectionView.swift */,
-				04C6D108211CF548006883C5 /* MovieListViewController.swift */,
 				04C6D10C211CFE31006883C5 /* MoviesAPIService.swift */,
 				0467B809210CB9B7007AF457 /* Constants.swift */,
-				0432501321446FB300335257 /* InfiniteScrollActivityView.swift */,
-				0413BF19215C3A3A00BE0258 /* RoundedButton.swift */,
-				04962EF621541AE500A5EF65 /* MovieDetailsViewController.swift */,
-				04B6BB57210DDE8900410021 /* MovieGridViewCell.swift */,
-				04C6D110211F84EA006883C5 /* MovieListViewCell.swift */,
 				0467B7FB210CB986007AF457 /* Main.storyboard */,
 				0467B7FE210CB986007AF457 /* Assets.xcassets */,
 				0467B800210CB986007AF457 /* LaunchScreen.storyboard */,

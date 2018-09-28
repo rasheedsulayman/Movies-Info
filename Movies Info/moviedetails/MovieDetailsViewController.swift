@@ -45,7 +45,6 @@ UICollectionViewDataSource , UICollectionViewDelegate {
         similarMoviesCollectionView.delegate = self
     }
     
-    
     func populateViews(){
         title = movie.title
         if let backDropPath = movie.backDropImageUrl() {
@@ -114,8 +113,7 @@ UICollectionViewDataSource , UICollectionViewDelegate {
             }
         }
     }
-    
-    
+
     @IBAction func onViewTrailerButtonClicked(_ sender: Any) {
         if let trailerKey = movie.trailerKey {
             var url = URL(string:"youtube://\(trailerKey)")!
@@ -125,15 +123,4 @@ UICollectionViewDataSource , UICollectionViewDelegate {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

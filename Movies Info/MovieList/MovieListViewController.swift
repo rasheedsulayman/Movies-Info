@@ -25,9 +25,10 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     var tableViewRefreshControl: UIRefreshControl!
     var collectionViewRefreshControl: UIRefreshControl!
     var isUserRefreshing = false
+    var moviesType = MoviesType.popular    //Defaults to popular movies
+    var moviesList: [Movie] = []
+    var nextPageToLoad: Int? = 1
 
-
-    
     var viewType: ViewType = .list {
         didSet {
             switch viewType {
@@ -40,10 +41,6 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
             }
         }
     }
-
-    var moviesType = MoviesType.popular    //Defaults to popular movies
-    var moviesList: [Movie] = []
-    var nextPageToLoad: Int? = 1
     
     var filteredMoviesList =  [Movie]() {
         didSet {
@@ -60,7 +57,6 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
         setUpCollectionView()
         setUpTableView()
         loadMovies()
-        connectionErrorView.layer.zPosition = 1
     }
     
     func setUpViews() {
@@ -72,7 +68,6 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
     
     func prepareTabItem () {
         let tabItem = navigationController!.tabBarItem!
-        
         switch moviesType {
         case .nowPlaying:
             title = "Now Playing"
@@ -100,27 +95,8 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
         return false
     }
     
-    func showLoadingIndicator()  {
-        loadingNotification = MBProgressHUD.showAdded(to: (navigationController?.topViewController?.view)!, animated: true)
-        loadingNotification!.mode = MBProgressHUDMode.indeterminate
-        loadingNotification!.label.text = "Loading Movies"
-    }
+ 
     
-    func showErrorLabel() {
-        connectionErrorView.isHidden = false
-        connectionErrorView.layer.zPosition = 1
-    }
-    
-    func dismissErrorLabel() {
-        connectionErrorView.isHidden = true
-        connectionErrorView.layer.zPosition = 0
-    }
-    
-    func stopLoadingMoreViewAnimation()  {
-        self.tableViewLoadingMoreView!.stopAnimating()
-        self.collectionViewLoadingMoreView!.stopAnimating()
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -141,7 +117,9 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
             viewType = .grid
         }
     }
-
+    
+    
+    // MARK: - Table and CollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         navigateToDetailsViewController(indexPath: indexPath)
     }
@@ -175,10 +153,10 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
     
-    
+    //Mark:- Pull to refresh
     @objc func onRefresh(){
         print("OnRefresh called")
-        nextPageToLoad = 1 //
+        nextPageToLoad = 1 //reset the movies to start from the first page
         isUserRefreshing = true
         loadMovies()
     }
@@ -193,33 +171,56 @@ class MovieListViewController: UIViewController, UISearchBarDelegate {
             loadingNotification = nil
         }
         if let nextPageToLoad = nextPageToLoad {
-            dismissErrorLabel()
+            setErrorViewViewWithAnimation(view: connectionErrorView, hidden: true)
             MoviesAPIService.getMoviesList(moviesType: moviesType.rawValue , pageNumber: nextPageToLoad) { (moviesApiResult) in
-                self.loadingNotification?.hide(animated: true)
                 //Update ongoingLoading flag
                 self.isDataLoading = false
-                self.stopLoadingMoreViewAnimation()
+                self.dismissLoadingViews()
                 if let moviesApiResult = moviesApiResult {
                     self.nextPageToLoad = moviesApiResult.nextPage
                     if self.isUserRefreshing {
                         self.moviesList.removeAll()
-                        self.endRefreshControl()
                     }
                     self.moviesList.append(contentsOf: moviesApiResult.moviesList)
                     self.filteredMoviesList = self.moviesList
                 } else{
-                    self.showErrorLabel()
+                    self.setErrorViewViewWithAnimation(view: self.connectionErrorView, hidden: false)
                     print("Error getting movies ")
                 }
             }
         }
     }
     
+  
+    //Mark:- Network activity indicator views
+    func showLoadingIndicator()  {
+        loadingNotification = MBProgressHUD.showAdded(to: (navigationController?.topViewController?.view)!, animated: true)
+        loadingNotification!.mode = MBProgressHUDMode.indeterminate
+        loadingNotification!.label.text = "Loading Movies"
+    }
+    
+    func stopLoadingMoreViewAnimation()  {
+        self.tableViewLoadingMoreView!.stopAnimating()
+        self.collectionViewLoadingMoreView!.stopAnimating()
+    }
+    
+    func setErrorViewViewWithAnimation(view: UIView, hidden: Bool) {
+        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            view.isHidden = hidden
+            view.layer.zPosition = hidden ? 0 : 1
+        })
+    }
+    
+    func dismissLoadingViews() {
+        self.stopLoadingMoreViewAnimation()
+        self.endRefreshControl()
+        self.loadingNotification?.hide(animated: true)
+    }
+    
     func endRefreshControl(){
         collectionViewRefreshControl.endRefreshing()
-       tableViewRefreshControl.endRefreshing()
-       isUserRefreshing = false
-
+        tableViewRefreshControl.endRefreshing()
+        isUserRefreshing = false
     }
     
     enum ViewType {
